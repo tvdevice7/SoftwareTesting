@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\DataLoader.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Player.cs" />

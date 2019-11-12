@@ -9,6 +9,9 @@ namespace WorldCup {
         public Qualifiers(List<Team> teams) : base(teams) {
             this.isKnockOut = false;
             groups = initializeGroups();
+            scores = new int[8, 4];
+            cards = new int[8, 4];
+            goals = new int[8, 4];
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 4; j++) {
                     goals[i, j] = cards[i, j] = scores[i, j] = 0;
@@ -32,7 +35,8 @@ namespace WorldCup {
                             getMatchData(m, i, j, k);
                         }
                     }
-                    List<Team> TeamsGoOnInGroup = chooseTeamsInGroup(groups.GetRow(i), scores.GetRow(i), cards.GetRow(i), goals.GetRow(i));
+                    Team[] rowDataTeam = { groups[i, 0], groups[i, 1], groups[i, 2] , groups[i, 3] };                    
+                    List<Team> TeamsGoOnInGroup = chooseTeamsInGroup(rowDataTeam, scores.GetRow(i), cards.GetRow(i), goals.GetRow(i));
                     foreach (Team t in TeamsGoOnInGroup) {
                         teamsGoOn.Add(t);
                     }
@@ -40,7 +44,7 @@ namespace WorldCup {
                 return teamsGoOn;
             }
             catch (Exception err) {
-                Console.WriteLine(err);
+                Console.WriteLine(err.Message);
                 return null;
             }
         }

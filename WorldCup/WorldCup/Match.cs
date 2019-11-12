@@ -21,12 +21,15 @@ namespace WorldCup {
         public Match(Team firstTeam, Team secondTeam, bool isKnockOut) {
             this.firstTeam = firstTeam;
             this.secondTeam = secondTeam;
+            cards = new List<Card>();
+            goals = new List<Goal>();
         }
 
         public void Compete() {
             for (int i = 0; i < 90; i++) {
 
             }
+            result = Result.FIRST_TEAM_WIN;
         }
 
         public Result Result {
