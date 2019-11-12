@@ -1,0 +1,6 @@
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\bin\Debug\WorldCup.exe.config
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\obj\Debug\WorldCup.csprojResolveAssemblyReference.cache
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\bin\Debug\WorldCup.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\bin\Debug\WorldCup.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\obj\Debug\WorldCup.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\WorldCup\WorldCup\obj\Debug\WorldCup.pdb
