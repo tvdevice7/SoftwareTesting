@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="DAO\DataProvider.cs" />
-    <Compile Include="Finals.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Player.cs" />
@@ -56,13 +55,12 @@
     <Compile Include="Region.cs" />
     <Compile Include="Round.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="Util\ArrayEXT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
