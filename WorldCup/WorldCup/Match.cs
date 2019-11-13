@@ -238,6 +238,9 @@ namespace WorldCup {
                 return null;
             }
         }
+        public List<Goal> Goals {
+            get { return goals; }
+        }
         public int FirstTeamGoal() {
             int firstTeamGoal = 0;
             foreach (Goal g in goals) {

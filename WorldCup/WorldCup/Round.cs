@@ -8,7 +8,7 @@ namespace WorldCup {
     class Round {
         protected int id;
         protected List<Team> teams;
-        protected List<Match> matches;
+        protected List<Match> matches;        
         protected bool isKnockOut;
 
         public Round() {
@@ -22,7 +22,7 @@ namespace WorldCup {
             isKnockOut = true;
         }
 
-        public virtual List<Team> startRound() {
+        public virtual List<Team> StartRound() {
             try {
                 if (teams.Count % 2 != 0) throw new Exception("Invalid number of teams");
                 List<Team> teamsGoOn = new List<Team>();
@@ -38,6 +38,14 @@ namespace WorldCup {
                 Console.WriteLine(err);
                 return null;
             }
+        }
+
+        public List<Goal> GetGoals() {
+            List<Goal> goals = new List<Goal>();
+            foreach (Match m in matches) {
+                goals.AddRange(m.Goals);
+            }
+            return goals;
         }
     }
 }

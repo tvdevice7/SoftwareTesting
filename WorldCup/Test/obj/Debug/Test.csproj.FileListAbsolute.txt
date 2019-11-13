@@ -1,0 +1,6 @@
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\bin\Debug\Test.exe.config
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\bin\Debug\Test.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\bin\Debug\Test.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\obj\Debug\Test.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Test\obj\Debug\Test.pdb

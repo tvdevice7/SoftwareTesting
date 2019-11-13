@@ -16,7 +16,7 @@ namespace WorldCup {
             }
         }
         List<Region> regions;
-        public override List<Team> startRound() {
+        public override List<Team> StartRound() {
             try {
                 if (regions.Count != 7) throw new Exception("Invalid Number of Region");
                 Team sixthAFC = regions[0].Teams[5];

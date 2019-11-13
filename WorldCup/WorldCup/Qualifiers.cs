@@ -24,7 +24,7 @@ namespace WorldCup {
         int[,] cards;
         int[,] goals;
 
-        public override List<Team> startRound() {
+        public override List<Team> StartRound() {
             try {
                 if (teams.Count != 32) throw new Exception("Invalid number of teams");
                 List<Team> teamsGoOn = new List<Team>();

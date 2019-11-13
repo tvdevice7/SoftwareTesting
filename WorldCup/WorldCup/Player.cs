@@ -9,6 +9,7 @@ namespace WorldCup {
     class Player {
         int id;
         string name;
+        int goalsScored;
         Team team;
 
         public Player(DataRow data) {
@@ -29,6 +30,11 @@ namespace WorldCup {
         public Team Team {
             get { return team; }
             set { team = value; }
+        }
+
+        public int GoalsScored {
+            get { return goalsScored; }
+            set { goalsScored = value; }
         }
     }
 }
