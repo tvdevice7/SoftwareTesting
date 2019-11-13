@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 namespace WorldCup {
     class Player {
         int id;
-        Team team;
+        string name;
 
-        public Team Team {
-            get { return team; }
-            set { team = value; }
+        public int ID {
+            get {return id;}
+            set {id = value;}
+        }
+
+        public string Name {
+            get { return name; }
+            set { name = value; }
         }
     }
 }
