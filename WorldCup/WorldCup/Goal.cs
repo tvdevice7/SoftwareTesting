@@ -10,9 +10,15 @@ namespace WorldCup {
         Player scorer;
         Match match;
 
-        internal Player Scorer {
+        public Player Scorer {
             get { return scorer; }
             set { scorer = value; }
+        }
+
+        public Match Match
+        {
+            get { return match; }
+            set { match = value; }
         }
     }
 }

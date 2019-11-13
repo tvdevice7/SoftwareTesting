@@ -42,9 +42,27 @@ namespace WorldCup {
             List<Team> teams = new List<Team>();
             foreach (DataRow row in data.Rows) {
                 Team t = new Team(row);
+                List<Player> players = LoadPlayer(t.ID);
+                t.Players = players;
                 teams.Add(t);
+                foreach (Player p in players) {
+                    p.Team = t;
+                }
             }
             return teams;
+        }
+
+        public List<Player> LoadPlayer(int idTeam) {
+            string query = "SELECT * FROM CauThu WHERE Team=" + idTeam.ToString();
+            DataTable data = new DataTable();
+            data = DataProvider.Instance.ExecuteQuery(query);
+
+            List<Player> players = new List<Player>();
+            foreach (DataRow row in data.Rows) {
+                Player p = new Player(row);
+                players.Add(p);
+            }
+            return players;
         }
     }
 }

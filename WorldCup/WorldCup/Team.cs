@@ -43,5 +43,20 @@ namespace WorldCup {
             get {return reservePlayers;}
             set {reservePlayers = value;}
         }
+
+        public int NumberOfPlayers()
+        {
+            return Players.Count();
+        }
+
+        public int NumberOfOfficial()
+        {
+            return OfficalPlayers.Count();
+        }
+
+        public int NumberOfReserve()
+        {
+            return ReservePlayers.Count();
+        }
     }
 }
