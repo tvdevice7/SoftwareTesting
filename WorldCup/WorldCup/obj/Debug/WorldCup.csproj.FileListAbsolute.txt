@@ -23,3 +23,9 @@ E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\Wo
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\WorldCup\bin\Debug\WorldCup.exe
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\WorldCup\bin\Debug\WorldCup.pdb
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\Quan\WorldCup\WorldCup\obj\Debug\WorldCup.csprojResolveAssemblyReference.cache
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\bin\Debug\WorldCup.exe.config
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\obj\Debug\WorldCup.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\obj\Debug\WorldCup.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\bin\Debug\WorldCup.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\bin\Debug\WorldCup.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\obj\Debug\WorldCup.csprojResolveAssemblyReference.cache
