@@ -34,10 +34,9 @@ namespace WorldCup {
         } 
 
         public List<Team> LoadTeams(int idRegion) {
-            string query = "SELECT * FROM Doi WHERE RegionID=" + idRegion.ToString();
+            string query = "SELECT * FROM Doi WHERE RegionID = " + idRegion.ToString();
             DataTable data = new DataTable();
             data = DataProvider.Instance.ExecuteQuery(query);
-
             List<Team> teams = new List<Team>();
             foreach (DataRow row in data.Rows) {
                 Team t = new Team(row);

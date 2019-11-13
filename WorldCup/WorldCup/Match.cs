@@ -23,7 +23,7 @@ namespace WorldCup {
                 redCard++;
             }
         };
-        const int goalChance = 5;
+        const int goalChance = 90;
         const int yellowCardChance = 3;
         const int redCardChance = 1;
         const int injuryChance = 2;
@@ -61,7 +61,7 @@ namespace WorldCup {
 
             firstTeamOfficial = initPlayerCardCount(firstTeam.OfficalPlayers);
             secondTeamOfficial = initPlayerCardCount(secondTeam.OfficalPlayers);
-            firstTeamReserve = initPlayerCardCount(firstTeam.ReservePlayers);            
+            firstTeamReserve = initPlayerCardCount(firstTeam.ReservePlayers);
             secondTeamReserve = initPlayerCardCount(secondTeam.ReservePlayers);
         }
 
@@ -76,100 +76,30 @@ namespace WorldCup {
             }
             foreach (Player p in temp) {
                 team.ReservePlayers.Add(p);
+                if (team.ReservePlayers.Count == 5) break;
             }
         }
 
         public void Compete() {
-            Random rnd = new Random();
             if (isExtraMatch) time = 15;
             else time = 90;
+            MainMatch();
+            ExtraMatch();
+            ResultCalculation();
+            exception = MatchException.NONE;
+        }
+
+        void MainMatch() {
             for (int i = 0; i < time; i++) {
-                int chance = rnd.Next(100);
-                if (chance <= goalChance) {
-                    Goal newGoal = new Goal();
-                    chance = rnd.Next(100);
-                    if (chance < 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
-                        newGoal.Scorer = firstTeamOfficial[chance].player;
-                        newGoal.Match = this;
-                    }
-                    else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
-                        newGoal.Scorer = secondTeamOfficial[chance].player;
-                        newGoal.Match = this;
-                    }
-                    goals.Add(newGoal);
-                }
-                chance = rnd.Next(100);
-                if (chance <= yellowCardChance) {
-                    bool canContinue = true;
-                    Card newCard = new Card(); // Cần phân loại red vs yellow card
-                    chance = rnd.Next(100);
-                    if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
-                        newCard.Player = firstTeamOfficial[chance].player;
-                        firstTeamOfficial[chance].addYellowCard();
-                        newCard.Match = this;
-                        newCard.IsRedCard = false;
-                        canContinue = SwapPlayerFirstTeam(chance, false);
-                    }
-                    else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
-                        newCard.Player = secondTeamOfficial[chance].player;
-                        secondTeamOfficial[chance].addYellowCard();
-                        newCard.Match = this;
-                        newCard.IsRedCard = false;
-                        canContinue = SwapPlayerSecondTeam(chance, false);
-                    }
-                    cards.Add(newCard);
-                    if (!canContinue) {
-                        exception = MatchException.NOT_ENOUGH_PLAYERS;
-                    }
-                    //Kiểm tra player đã có 2 card vàng chưa, nếu có thì phải thay đổi player
-                }
-                chance = rnd.Next(100);
-                if (chance <= redCardChance) {
-                    bool canContinue = true;
-                    Card newCard = new Card(); // Cần phân loại red vs yellow card
-                    chance = rnd.Next(100);
-                    if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
-                        newCard.Player = firstTeamOfficial[chance].player;
-                        firstTeamOfficial[chance].addYellowCard();
-                        newCard.Match = this;
-                        newCard.IsRedCard = true;
-                        canContinue = SwapPlayerFirstTeam(chance, false);
-                    }
-                    else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
-                        newCard.Player = secondTeamOfficial[chance].player;
-                        secondTeamOfficial[chance].addRedCard();
-                        newCard.Match = this;
-                        newCard.IsRedCard = true;
-                        canContinue = SwapPlayerSecondTeam(chance, false);
-                    }
-                    cards.Add(newCard);
-                    if (!canContinue) {
-                        exception = MatchException.NOT_ENOUGH_PLAYERS;
-                    }
-                }
-                chance = rnd.Next(100);
-                if (chance <= injuryChance) {
-                    bool canContinue = true;
-                    chance = rnd.Next(100);
-                    if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
-                        canContinue = SwapPlayerFirstTeam(chance, true);
-                    }
-                    else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
-                        canContinue = SwapPlayerSecondTeam(chance, true);
-                    }
-                    if (!canContinue) {
-                        exception = MatchException.NOT_ENOUGH_PLAYERS;
-                    }
-                }
+                Random rnd = new Random();
+                GoalHandler(rnd);
+                YellowCardHandler(rnd);
+                RedCardHandler(rnd);
+                InjuryHandler(rnd);
             }
+        }
+
+        void ExtraMatch() {
             if (FirstTeamGoal() == SecondTeamGoal() && !isExtraMatch && isKnockOut) {
                 Match extraMatch1st = new Match(firstTeam, secondTeam, true);
                 extraMatch.Add(extraMatch1st);
@@ -186,17 +116,107 @@ namespace WorldCup {
                 result = extraMatch1st.result;
                 return;
             }
-            if (FirstTeamGoal() > SecondTeamGoal()) {
-                result = Result.FIRST_TEAM_WIN;
-            }
-            else if (FirstTeamGoal() < SecondTeamGoal()) {
-                result = Result.SECOND_TEAM_WIN;
-            }
-            else {
-                result = Result.DRAW;
-            }
-            exception = MatchException.NONE;
         }
+
+        public void GoalHandler(Random rnd) {
+            int chance = rnd.Next(100);
+            if (chance < goalChance) {
+                Goal newGoal = new Goal();
+                chance = rnd.Next(100);
+                if (chance < 50) {
+                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    newGoal.Scorer = firstTeamOfficial[chance].player;
+                    newGoal.Match = this;
+                }
+                else {
+                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    newGoal.Scorer = secondTeamOfficial[chance].player;
+                    newGoal.Match = this;
+                }
+                this.goals.Add(newGoal);
+            }
+        }
+        public void YellowCardHandler(Random rnd) {
+            int chance = rnd.Next(100);
+            if (chance <= yellowCardChance) {
+                bool canContinue = true;
+                Card newCard = new Card(); // Cần phân loại red vs yellow card
+                chance = rnd.Next(100);
+                if (chance > 50) {
+                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    newCard.Player = firstTeamOfficial[chance].player;
+                    firstTeamOfficial[chance].addYellowCard();
+                    newCard.Match = this;
+                    newCard.IsRedCard = false;
+                    canContinue = SwapPlayerFirstTeam(chance, false);
+                }
+                else {
+                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    newCard.Player = secondTeamOfficial[chance].player;
+                    secondTeamOfficial[chance].addYellowCard();
+                    newCard.Match = this;
+                    newCard.IsRedCard = false;
+                    canContinue = SwapPlayerSecondTeam(chance, false);
+                }
+                cards.Add(newCard);
+                if (!canContinue) {
+                    exception = MatchException.NOT_ENOUGH_PLAYERS;
+                }
+                //Kiểm tra player đã có 2 card vàng chưa, nếu có thì phải thay đổi player
+            }
+        }
+        public void RedCardHandler(Random rnd) {
+            int chance = rnd.Next(100);
+            if (chance <= redCardChance) {
+                bool canContinue = true;
+                Card newCard = new Card(); // Cần phân loại red vs yellow card
+                chance = rnd.Next(100);
+                if (chance > 50) {
+                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    newCard.Player = firstTeamOfficial[chance].player;
+                    firstTeamOfficial[chance].addYellowCard();
+                    newCard.Match = this;
+                    newCard.IsRedCard = true;
+                    canContinue = SwapPlayerFirstTeam(chance, false);
+                }
+                else {
+                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    newCard.Player = secondTeamOfficial[chance].player;
+                    secondTeamOfficial[chance].addRedCard();
+                    newCard.Match = this;
+                    newCard.IsRedCard = true;
+                    canContinue = SwapPlayerSecondTeam(chance, false);
+                }
+                cards.Add(newCard);
+                if (!canContinue) {
+                    exception = MatchException.NOT_ENOUGH_PLAYERS;
+                }
+            }
+        }
+        public void InjuryHandler(Random rnd) {
+            int chance = rnd.Next(100);
+            if (chance <= injuryChance) {
+                bool canContinue = true;
+                chance = rnd.Next(100);
+                if (chance > 50) {
+                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    canContinue = SwapPlayerFirstTeam(chance, true);
+                }
+                else {
+                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    canContinue = SwapPlayerSecondTeam(chance, true);
+                }
+                if (!canContinue) {
+                    exception = MatchException.NOT_ENOUGH_PLAYERS;
+                }
+            }
+        }
+
+        void ResultCalculation() {
+            if (FirstTeamGoal() > SecondTeamGoal()) result = Result.FIRST_TEAM_WIN;
+            else if (FirstTeamGoal() < SecondTeamGoal()) result = Result.SECOND_TEAM_WIN;
+            else result = Result.DRAW;
+        }        
 
         public void printHappening() {
             Console.WriteLine("Tran dau giua doi " + firstTeam.Name + " va doi " + secondTeam.Name);
@@ -216,6 +236,13 @@ namespace WorldCup {
         public List<Goal> Goals {
             get { return goals; }
         }
+        public Team FirstTeam {
+            get { return firstTeam; }
+        }
+        public Team SecondTeam {
+            get { return secondTeam; }
+        }
+
         public int FirstTeamGoal() {
             int firstTeamGoal = 0;
             foreach (Goal g in goals) {

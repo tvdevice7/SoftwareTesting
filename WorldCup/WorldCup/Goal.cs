@@ -10,13 +10,17 @@ namespace WorldCup {
         Player scorer;
         Match match;
 
+        public int Id {
+            get { return id; }
+            set { id = value; }
+        }
+
         public Player Scorer {
             get { return scorer; }
             set { scorer = value; }
         }
 
-        public Match Match
-        {
+        public Match Match {
             get { return match; }
             set { match = value; }
         }

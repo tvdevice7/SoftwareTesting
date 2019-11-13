@@ -86,7 +86,6 @@ namespace WorldCup {
             else idx2ndScores = 0;
             int secondScores = scores[idx2ndScores];
 
-
             for (int i = idx2ndScores + 1; i < 4; i++) {
                 if (i == idxHighestScores) continue;
                 if (scores[i] > secondScores) {
