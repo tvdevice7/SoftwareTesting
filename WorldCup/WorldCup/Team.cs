@@ -14,9 +14,9 @@ namespace WorldCup {
 
         int id;
         string name;
-        int numPlayers;
-        int numOfficialPlayers;
-        int numReservePlayers;
+        List<Player> players;
+        List<Player> officalPlayers;
+        List<Player> reservePlayers;
         int numAssistantCoach;
 
         public int ID {
@@ -27,6 +27,21 @@ namespace WorldCup {
         public string Name {
             get { return name; }
             set { name = value; }
+        }
+
+        public List<Player> Players {
+            get {return players;}
+            set {players = value;}
+        }
+
+        public List<Player> OfficalPlayers {
+            get {return officalPlayers;}
+            set {officalPlayers = value;}
+        }
+
+        public List<Player> ReservePlayers {
+            get {return reservePlayers;}
+            set {reservePlayers = value;}
         }
     }
 }
