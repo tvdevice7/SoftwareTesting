@@ -198,6 +198,11 @@ namespace WorldCup {
             exception = MatchException.NONE;
         }
 
+        public void printHappening() {
+            Console.WriteLine("Tran dau giua doi " + firstTeam.Name + " va doi " + secondTeam.Name);
+            Console.WriteLine("Ti so: " + FirstTeamGoal().ToString() + " - " + SecondTeamGoal().ToString());
+        }
+
         public Result Result {
             get { return result; }
         }

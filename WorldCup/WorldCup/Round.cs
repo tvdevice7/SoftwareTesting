@@ -48,5 +48,11 @@ namespace WorldCup {
             }
             return goals;
         }
+
+        public void printHappening() {
+            foreach (Match m in matches) {
+                m.printHappening();
+            }
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace WorldCup {
                     for (int k = j + 1; k < 4; k++) {
                         Match m = new Match(groups[i, j], groups[i, k], false);
                         m.Compete();
+                        matches.Add(m);
                         getMatchData(m, i, j, k);
                     }
                 }
