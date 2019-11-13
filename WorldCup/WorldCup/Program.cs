@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WorldCup {
     class Program {
         static void Main(string[] args) {
-            try {
+            //try {
                 List<Region> regions = new List<Region>();
                 regions = DataLoader.Instance.LoadRegions();
 
@@ -70,10 +70,10 @@ namespace WorldCup {
                 Console.WriteLine("Vua pha luoi: ");
                 Console.WriteLine(topScorer.Name);
                 Console.WriteLine("--------------------------------------------------------");
-            }
-            catch (Exception err) {
-                Console.WriteLine(err.Message);
-            }            
+            //}
+            //catch (Exception err) {
+            //    Console.WriteLine(err.Message);
+            //}            
 
             Console.ReadKey();
         }

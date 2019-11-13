@@ -25,29 +25,25 @@ namespace WorldCup {
         int[,] goals;
 
         public override List<Team> StartRound() {
-            try {
-                if (teams.Count != 32) throw new Exception("Invalid number of teams");
-                List<Team> teamsGoOn = new List<Team>();
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        for (int k = j + 1; k < 4; k++) {
-                            Match m = new Match(groups[i, j], groups[i, k], false);
-                            getMatchData(m, i, j, k);
-                        }
-                    }
-                    Team[] rowDataTeam = { groups[i, 0], groups[i, 1], groups[i, 2] , groups[i, 3] };                    
-                    List<Team> TeamsGoOnInGroup = chooseTeamsInGroup(rowDataTeam, scores.GetRow(i), cards.GetRow(i), goals.GetRow(i));
-                    foreach (Team t in TeamsGoOnInGroup) {
-                        teamsGoOn.Add(t);
+            if (teams.Count != 32) throw new Exception("Invalid number of teams");
+            List<Team> teamsGoOn = new List<Team>();
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 3; j++) {
+                    for (int k = j + 1; k < 4; k++) {
+                        Match m = new Match(groups[i, j], groups[i, k], false);
+                        m.Compete();
+                        getMatchData(m, i, j, k);
                     }
                 }
-                return teamsGoOn;
+                Team[] rowDataTeam = { groups[i, 0], groups[i, 1], groups[i, 2], groups[i, 3] };
+                List<Team> TeamsGoOnInGroup = chooseTeamsInGroup(rowDataTeam, scores.GetRow(i), cards.GetRow(i), goals.GetRow(i));
+                foreach (Team t in TeamsGoOnInGroup) {
+                    teamsGoOn.Add(t);
+                }
             }
-            catch (Exception err) {
-                Console.WriteLine(err.Message);
-                return null;
-            }
+            return teamsGoOn;
         }
+
 
         Team[,] initializeGroups() {
             Team[,] groups = new Team[8, 4];

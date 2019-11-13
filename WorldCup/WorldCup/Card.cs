@@ -11,19 +11,21 @@ namespace WorldCup {
         Match match;
         bool isRedCard;
 
+        public int Id {
+            get { return id; }
+            set { id = value; }
+        }
         public Player Player {
             get { return player; }
             set { player = value; }
         }
 
-        public Match Match
-        {
+        public Match Match {
             get { return match; }
             set { match = value; }
         }
 
-        public bool IsRedCard
-        {
+        public bool IsRedCard {
             get { return isRedCard; }
             set { isRedCard = value; }
         }

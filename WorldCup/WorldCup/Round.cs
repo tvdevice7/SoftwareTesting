@@ -28,6 +28,7 @@ namespace WorldCup {
                 List<Team> teamsGoOn = new List<Team>();
                 for (int i = 0; i < teams.Count; i += 2) {
                     Match m = new Match(teams[i], teams[i + 1], isKnockOut);
+                    m.Compete();
                     matches.Add(m);
                     if (m.Winner == null) throw new Exception("Invalid match");
                     else teamsGoOn.Add(m.Winner);

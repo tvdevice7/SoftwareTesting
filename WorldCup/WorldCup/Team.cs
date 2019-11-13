@@ -58,19 +58,6 @@ namespace WorldCup {
             get { return assistantCoach; }
             set { assistantCoach = value; }
         }
-
-        public int NumberOfPlayers() {
-            return Players.Count();
-        }
-
-        public int NumberOfOfficial() {
-            return OfficalPlayers.Count();
-        }
-
-        public int NumberOfReserve() {
-            return ReservePlayers.Count();
-        }
-
         public void checkTeam() {
             if (assistantCoach.Count > 3) throw new Exception("Invalid number of assistant coach");
             if (players.Count > 22) throw new Exception("Invalid number of player");

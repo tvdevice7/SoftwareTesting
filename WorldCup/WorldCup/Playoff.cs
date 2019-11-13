@@ -25,9 +25,13 @@ namespace WorldCup {
                 Team firstOFC = regions[4].Teams[0];
 
                 Match m1 = new Match(sixthAFC, fourthCONCACAF, false);
+                m1.Compete();
                 Match m2 = new Match(fourthCONCACAF, sixthAFC, false);
+                m2.Compete();
                 Match m3 = new Match(fourthCONMEBOL, firstOFC, false);
+                m3.Compete();
                 Match m4 = new Match(firstOFC, fourthCONMEBOL, false);
+                m4.Compete();
                 matches.Add(m1);
                 matches.Add(m2);
                 matches.Add(m3);
