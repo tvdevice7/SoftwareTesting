@@ -118,7 +118,7 @@ namespace WorldCup {
                 if (chance <= goalChance) {
                     Goal newGoal = new Goal();
                     chance = rnd.Next(100);
-                    if (chance > 50) {
+                    if (chance < 50) {
                         chance = rnd.Next(firstTeamOfficial.Count() - 1);
                         newGoal.Scorer = firstTeamOfficial[chance].GetPlayer();
                         newGoal.Match = this;
@@ -217,7 +217,6 @@ namespace WorldCup {
                 return;
             }
             if (FirstTeamGoal() > SecondTeamGoal()) {
-                Console.Write(FirstTeamGoal() + "  " + SecondTeamGoal());
                 result = Result.FIRST_TEAM_WIN;
             }
             else if (FirstTeamGoal() < SecondTeamGoal()) {

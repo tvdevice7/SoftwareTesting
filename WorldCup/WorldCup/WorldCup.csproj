@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssistantCoach.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="Coach.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\DataLoader.cs" />
+    <Compile Include="Doctor.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Player.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="Qualifiers.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="Round.cs" />
+    <Compile Include="Staff.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Util\ArrayEXT.cs" />
   </ItemGroup>

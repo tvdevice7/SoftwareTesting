@@ -17,7 +17,9 @@ namespace WorldCup {
         List<Player> players;
         List<Player> officalPlayers;
         List<Player> reservePlayers;
-        int numAssistantCoach;
+        Coach coach;
+        List<AssistantCoach> assistantCoach;
+        Doctor doctor;
 
         public int ID {
             get { return id; }
@@ -30,33 +32,48 @@ namespace WorldCup {
         }
 
         public List<Player> Players {
-            get {return players;}
-            set {players = value;}
+            get { return players; }
+            set { players = value; }
         }
 
         public List<Player> OfficalPlayers {
-            get {return officalPlayers;}
-            set {officalPlayers = value;}
+            get { return officalPlayers; }
+            set { officalPlayers = value; }
         }
 
         public List<Player> ReservePlayers {
-            get {return reservePlayers;}
-            set {reservePlayers = value;}
+            get { return reservePlayers; }
+            set { reservePlayers = value; }
         }
 
-        public int NumberOfPlayers()
-        {
+        public Coach Coach {
+            get { return coach; }
+            set { coach = value; }
+        }
+        public Doctor Doctor {
+            get { return doctor; }
+            set { doctor = value; }
+        }
+        public List<AssistantCoach> AssistantCoach {
+            get { return assistantCoach; }
+            set { assistantCoach = value; }
+        }
+
+        public int NumberOfPlayers() {
             return Players.Count();
         }
 
-        public int NumberOfOfficial()
-        {
+        public int NumberOfOfficial() {
             return OfficalPlayers.Count();
         }
 
-        public int NumberOfReserve()
-        {
+        public int NumberOfReserve() {
             return ReservePlayers.Count();
+        }
+
+        public void checkTeam() {
+            if (assistantCoach.Count > 3) throw new Exception("Invalid number of assistant coach");
+            if (players.Count > 22) throw new Exception("Invalid number of player");
         }
     }
 }
