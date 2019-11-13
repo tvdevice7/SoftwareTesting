@@ -217,6 +217,7 @@ namespace WorldCup {
                 return;
             }
             if (FirstTeamGoal() > SecondTeamGoal()) {
+                Console.Write(FirstTeamGoal() + "  " + SecondTeamGoal());
                 result = Result.FIRST_TEAM_WIN;
             }
             else if (FirstTeamGoal() < SecondTeamGoal()) {
@@ -234,6 +235,7 @@ namespace WorldCup {
         public Team Winner {
             get {
                 if (result == Result.FIRST_TEAM_WIN) return firstTeam;
+                if (result == Result.SECOND_TEAM_WIN) return secondTeam;
                 return null;
             }
         }
