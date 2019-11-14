@@ -29,3 +29,10 @@ E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\bin\Debug\WorldCup.exe
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\bin\Debug\WorldCup.pdb
 E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCup\obj\Debug\WorldCup.csprojResolveAssemblyReference.cache
+D:\SoftwareTesting\WorldCup\WorldCup\bin\Debug\WorldCup.exe.config
+D:\SoftwareTesting\WorldCup\WorldCup\bin\Debug\WorldCup.exe
+D:\SoftwareTesting\WorldCup\WorldCup\bin\Debug\WorldCup.pdb
+D:\SoftwareTesting\WorldCup\WorldCup\obj\Debug\WorldCup.csprojAssemblyReference.cache
+D:\SoftwareTesting\WorldCup\WorldCup\obj\Debug\WorldCup.csproj.CoreCompileInputs.cache
+D:\SoftwareTesting\WorldCup\WorldCup\obj\Debug\WorldCup.exe
+D:\SoftwareTesting\WorldCup\WorldCup\obj\Debug\WorldCup.pdb

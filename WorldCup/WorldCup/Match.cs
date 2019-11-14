@@ -66,10 +66,9 @@ namespace WorldCup {
         }
 
         public void chooseOfficialSquad(Team team) {
-            Random random = new Random();
             List<Player> temp = new List<Player>(team.Players);
             for (int i = 0; i < 11; i++) {
-                int id = random.Next(temp.Count);
+                int id = RandomGenerator.rnd.Next(temp.Count);
                 Player p = temp[id];
                 team.OfficalPlayers.Add(p);
                 temp.Remove(p);
@@ -80,33 +79,32 @@ namespace WorldCup {
         }
 
         public void Compete() {
-            Random rnd = new Random();
             if (isExtraMatch) time = 15;
             else time = 90;
             for (int i = 0; i < time; i++) {
-                int chance = rnd.Next(100);
+                int chance = RandomGenerator.rnd.Next(100);
                 if (chance <= goalChance) {
                     Goal newGoal = new Goal();
-                    chance = rnd.Next(100);
+                    chance = RandomGenerator.rnd.Next(100);
                     if (chance < 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                         newGoal.Scorer = firstTeamOfficial[chance].player;
                         newGoal.Match = this;
                     }
                     else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                         newGoal.Scorer = secondTeamOfficial[chance].player;
                         newGoal.Match = this;
                     }
                     goals.Add(newGoal);
                 }
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance <= yellowCardChance) {
                     bool canContinue = true;
                     Card newCard = new Card(); // Cần phân loại red vs yellow card
-                    chance = rnd.Next(100);
+                    chance = RandomGenerator.rnd.Next(100);
                     if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                         newCard.Player = firstTeamOfficial[chance].player;
                         firstTeamOfficial[chance].addYellowCard();
                         newCard.Match = this;
@@ -114,7 +112,7 @@ namespace WorldCup {
                         canContinue = SwapPlayerFirstTeam(chance, false);
                     }
                     else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                         newCard.Player = secondTeamOfficial[chance].player;
                         secondTeamOfficial[chance].addYellowCard();
                         newCard.Match = this;
@@ -127,13 +125,13 @@ namespace WorldCup {
                     }
                     //Kiểm tra player đã có 2 card vàng chưa, nếu có thì phải thay đổi player
                 }
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance <= redCardChance) {
                     bool canContinue = true;
                     Card newCard = new Card(); // Cần phân loại red vs yellow card
-                    chance = rnd.Next(100);
+                    chance = RandomGenerator.rnd.Next(100);
                     if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                         newCard.Player = firstTeamOfficial[chance].player;
                         firstTeamOfficial[chance].addYellowCard();
                         newCard.Match = this;
@@ -141,7 +139,7 @@ namespace WorldCup {
                         canContinue = SwapPlayerFirstTeam(chance, false);
                     }
                     else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                         newCard.Player = secondTeamOfficial[chance].player;
                         secondTeamOfficial[chance].addRedCard();
                         newCard.Match = this;
@@ -153,16 +151,16 @@ namespace WorldCup {
                         exception = MatchException.NOT_ENOUGH_PLAYERS;
                     }
                 }
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance <= injuryChance) {
                     bool canContinue = true;
-                    chance = rnd.Next(100);
+                    chance = RandomGenerator.rnd.Next(100);
                     if (chance > 50) {
-                        chance = rnd.Next(firstTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                         canContinue = SwapPlayerFirstTeam(chance, true);
                     }
                     else {
-                        chance = rnd.Next(secondTeamOfficial.Count - 1);
+                        chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                         canContinue = SwapPlayerSecondTeam(chance, true);
                     }
                     if (!canContinue) {
