@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Playoff : Round {
+    public class Playoff : Round {
         public Playoff(List<Region> regions) {
             this.isKnockOut = false;
             this.regions = regions;

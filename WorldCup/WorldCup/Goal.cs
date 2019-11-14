@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Goal {
+    public class Goal {
         int id;
         Player scorer;
         Match match;        

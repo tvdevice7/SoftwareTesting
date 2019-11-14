@@ -6,7 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Team {
+    public class Team {
+        public Team(int id, string name) {
+            this.id = id;
+            this.name = name;
+        }
         public Team(DataRow data) {
             this.ID = (int)data["ID"];
             this.Name = data["TenDoi"].ToString();

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Card {
+    public class Card {
         int id;
         Player player;
         Match match;

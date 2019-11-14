@@ -11,7 +11,7 @@ namespace WorldCup {
     public enum MatchException {
         NONE, NOT_ENOUGH_PLAYERS
     }
-    class Match {
+    public class Match {
         struct PlayerCardCount {
             public Player player;
             public int yellowCard;
@@ -155,6 +155,20 @@ namespace WorldCup {
                 }
                 this.goals.Add(newGoal);
             }
+        }
+        public void firstTeamScore() {
+            Goal newGoal = new Goal();
+            int chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
+            newGoal.Scorer = firstTeamOfficial[chance].player;
+            newGoal.Match = this;
+            this.goals.Add(newGoal);
+        }
+        public void secondTeamScore() {
+            Goal newGoal = new Goal();
+            int chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
+            newGoal.Scorer = secondTeamOfficial[chance].player;
+            newGoal.Match = this;
+            this.goals.Add(newGoal);
         }
         public void YellowCardHandler(Random rnd) {
             int chance = RandomGenerator.rnd.Next(100);

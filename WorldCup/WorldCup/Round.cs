@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Round {
+    public class Round {
         protected int id;
         protected List<Team> teams;
         protected List<Match> matches;        

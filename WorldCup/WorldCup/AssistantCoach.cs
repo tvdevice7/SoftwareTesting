@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class AssistantCoach : Staff {
+    public class AssistantCoach : Staff {
         public AssistantCoach(DataRow data) {
             this.ID = (int)data["ID"];
             this.Name = data["AssistantCoach"].ToString();

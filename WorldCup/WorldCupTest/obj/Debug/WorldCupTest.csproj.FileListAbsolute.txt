@@ -1,0 +1,8 @@
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\bin\Debug\WorldCupTest.dll
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\bin\Debug\WorldCupTest.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\bin\Debug\WorldCup.exe
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\bin\Debug\WorldCup.pdb
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\obj\Debug\WorldCupTest.csprojResolveAssemblyReference.cache
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\obj\Debug\WorldCupTest.dll
+E:\Document\COMPUTER SCIENCE\Software Testing\Assignment\Github\master\WorldCup\WorldCupTest\obj\Debug\WorldCupTest.pdb

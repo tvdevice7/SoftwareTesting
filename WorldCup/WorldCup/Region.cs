@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Region {
+    public class Region {
         int id;
         string name;
         List<Team> teams;

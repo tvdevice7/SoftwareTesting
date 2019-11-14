@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Player {
+    public class Player {
         int id;
         string name;
         int goalsScored;
@@ -15,6 +15,11 @@ namespace WorldCup {
         public Player(DataRow data) {
             this.ID = (int)data["ID"];
             this.Name = data["CauThu"].ToString();
+        }
+        public Player(int id, string name, Team t) {
+            this.id = id;
+            this.name = name;
+            this.team = t;
         }
 
         public int ID {

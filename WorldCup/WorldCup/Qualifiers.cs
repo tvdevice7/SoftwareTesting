@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Qualifiers : Round {
+    public class Qualifiers : Round {
         public Qualifiers(List<Team> teams) : base(teams) {
             this.isKnockOut = false;
             groups = initializeGroups();

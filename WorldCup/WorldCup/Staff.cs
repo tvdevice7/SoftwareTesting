@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WorldCup {
-    class Staff {
+    public class Staff {
         int id;
         string name;
 
