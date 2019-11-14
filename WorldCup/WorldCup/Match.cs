@@ -45,7 +45,6 @@ namespace WorldCup {
         List<Match> extraMatch;
         bool isExtraMatch = false;
 
-
         public Match(Team firstTeam, Team secondTeam, bool isKnockOut) {
             this.firstTeam = firstTeam;
             this.secondTeam = secondTeam;
@@ -65,7 +64,6 @@ namespace WorldCup {
             firstTeamReserve = initPlayerCardCount(firstTeam.ReservePlayers);
             secondTeamReserve = initPlayerCardCount(secondTeam.ReservePlayers);
         }
-
         public void chooseOfficialSquad(Team team) {
             Random random = new Random();
             List<Player> temp = new List<Player>(team.Players);
@@ -80,19 +78,20 @@ namespace WorldCup {
                 if (team.ReservePlayers.Count == 5) break;
             }
         }
-
         public void Compete() {            
             MatchProgression(90);
             ExtraMatch();            
             exception = MatchException.NONE;
         }
-
         void MatchProgression(int timeMatch) {
             Random rnd = new Random();
             for (int i = 0; i < timeMatch; i++) {
-                GoalHandler(rnd);
-                YellowCardHandler(rnd);
-                RedCardHandler(rnd);
+                int chance = RandomGenerator.rnd.Next(100);
+                GoalHandler(chance);
+                chance = RandomGenerator.rnd.Next(100);
+                YellowCardHandler(chance);
+                chance = RandomGenerator.rnd.Next(100);
+                RedCardHandler(chance);
                 InjuryHandler(rnd);
             }
             ResultCalculate();
@@ -137,9 +136,7 @@ namespace WorldCup {
                 }
             }
         }
-
-        public void GoalHandler(Random rnd) {
-            int chance = RandomGenerator.rnd.Next(100);
+        public void GoalHandler(int chance) {            
             if (chance < goalChance) {
                 Goal newGoal = new Goal();
                 chance = RandomGenerator.rnd.Next(100);
@@ -170,8 +167,7 @@ namespace WorldCup {
             newGoal.Match = this;
             this.goals.Add(newGoal);
         }
-        public void YellowCardHandler(Random rnd) {
-            int chance = RandomGenerator.rnd.Next(100);
+        public void YellowCardHandler(int chance) {
             if (chance <= yellowCardChance) {
                 bool canContinue = true;
                 Card newCard = new Card(); // Cần phân loại red vs yellow card
@@ -199,8 +195,7 @@ namespace WorldCup {
                 //Kiểm tra player đã có 2 card vàng chưa, nếu có thì phải thay đổi player
             }
         }
-        public void RedCardHandler(Random rnd) {
-            int chance = RandomGenerator.rnd.Next(100);
+        public void RedCardHandler(int chance) {            
             if (chance <= redCardChance) {
                 bool canContinue = true;
                 Card newCard = new Card(); // Cần phân loại red vs yellow card
@@ -245,20 +240,17 @@ namespace WorldCup {
                 }
             }
         }
-
         void ResultCalculate() {
             if (FirstTeamGoal() > SecondTeamGoal()) result = Result.FIRST_TEAM_WIN;
             else if (FirstTeamGoal() < SecondTeamGoal()) result = Result.SECOND_TEAM_WIN;
             else result = Result.DRAW;
         }
-
         public void printHappening() {
             Console.WriteLine("Tran dau giua doi " + firstTeam.Name + " va doi " + secondTeam.Name);
             Console.Write("Ti so: " + FirstTeamGoal().ToString() + " - " + SecondTeamGoal().ToString());
             if (penalties == null) Console.WriteLine("");
             else Console.WriteLine(" (" + FirstTeamPen() + " - " + SecondTeamPen() + ")");
         }
-
         public Result Result {
             get { return result; }
         }
@@ -272,13 +264,15 @@ namespace WorldCup {
         public List<Goal> Goals {
             get { return goals; }
         }
+        public List<Card> Cards {
+            get { return cards; }
+        }
         public Team FirstTeam {
             get { return firstTeam; }
         }
         public Team SecondTeam {
             get { return secondTeam; }
         }
-
         public int FirstTeamGoal() {
             int firstTeamGoal = 0;
             foreach (Goal g in goals) {
@@ -321,9 +315,7 @@ namespace WorldCup {
             }
             return secondTeamPen;
         }
-
-
-        bool SwapPlayerFirstTeam(int id, bool isInjury) {
+        public bool SwapPlayerFirstTeam(int id, bool isInjury) {
             PlayerCardCount temp = firstTeamOfficial[id];
             if (((temp.yellowCard < 2) || (temp.redCard < 1)) && (!isInjury)) {
                 return true;
@@ -344,8 +336,7 @@ namespace WorldCup {
             result = Result.SECOND_TEAM_WIN;
             return false;
         }
-
-        bool SwapPlayerSecondTeam(int id, bool isInjury) {
+        public bool SwapPlayerSecondTeam(int id, bool isInjury) {
             PlayerCardCount temp = secondTeamOfficial[id];
             if (((temp.yellowCard < 2) || (temp.redCard < 1)) && (!isInjury)) {
                 return true;
@@ -366,7 +357,6 @@ namespace WorldCup {
             result = Result.FIRST_TEAM_WIN;
             return false;
         }
-
         List<PlayerCardCount> initPlayerCardCount(List<Player> players) {
             List<PlayerCardCount> lstPlayerCardCount = new List<PlayerCardCount>();
             foreach (Player p in players) {
