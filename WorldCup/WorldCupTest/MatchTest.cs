@@ -11,7 +11,18 @@ namespace WorldCupTest {
         public MatchTest() {
             this.A = this.createTeam(0, "A");
             this.B = this.createTeam(1, "B");
-        }               
+        }
+
+        //[TestMethod]
+        //public void MatchCreationTest() {
+        //    Match test = new Match(A, B, false);
+        //    bool result = false;
+        //    if (test.Result == Result.NONE) {
+        //        result = true;
+        //    }
+
+        //    Assert.IsTrue(result);
+        //}
 
         [TestMethod]
         public void OfficialTeamPicker_Team1() {
@@ -20,6 +31,7 @@ namespace WorldCupTest {
             if (A.OfficalPlayers.Count == 11) {
                 result = true;
             }
+
             Assert.IsTrue(result);
         }
 
@@ -55,6 +67,18 @@ namespace WorldCupTest {
 
             Assert.IsTrue(result);
         }
+
+        //[TestMethod]
+        //public void MatchExecutionTest() {
+        //    Match test = new Match(A, B, false);
+        //    bool result = false;
+        //    test.Compete();
+        //    if (test.Result != Result.NONE) {
+        //        result = true;
+        //    }
+
+        //    Assert.IsTrue(result);
+        //}
 
         [TestMethod]
         public void GoalCheckerTest_Team1() {
@@ -95,6 +119,26 @@ namespace WorldCupTest {
                 test.SwapPlayerSecondTeam(0, true);
             }
             Assert.IsFalse(test.SwapPlayerSecondTeam(0, true));
+        }
+
+        [TestMethod]
+        public void PCCCheck_Team1() {
+            Match test = new Match(A, B, false);
+            bool result = false;
+            if ((test.FirstTeam.OfficalPlayers.Count == 11) && (test.FirstTeam.ReservePlayers.Count == 5)) {
+                result = true;
+            }
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void PCCCheck_Team2() {
+            Match test = new Match(A, B, false);
+            bool result = false;
+            if ((test.SecondTeam.OfficalPlayers.Count == 11) && (test.SecondTeam.ReservePlayers.Count == 5)) {
+                result = true;
+            }
+            Assert.IsTrue(result);
         }
 
         private Team createTeam(int id, string name) {
