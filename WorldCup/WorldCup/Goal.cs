@@ -8,7 +8,7 @@ namespace WorldCup {
     class Goal {
         int id;
         Player scorer;
-        Match match;
+        Match match;        
 
         public int Id {
             get { return id; }

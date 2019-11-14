@@ -23,7 +23,7 @@ namespace WorldCup {
                 redCard++;
             }
         };
-        const int goalChance = 90;
+        const int goalChance = 5;
         const int yellowCardChance = 3;
         const int redCardChance = 1;
         const int injuryChance = 2;
@@ -35,6 +35,7 @@ namespace WorldCup {
         bool isKnockOut;
         List<Card> cards;
         List<Goal> goals;
+        List<Goal> penalties;
         List<PlayerCardCount> firstTeamOfficial;
         List<PlayerCardCount> firstTeamReserve;
         List<PlayerCardCount> secondTeamOfficial;
@@ -90,15 +91,14 @@ namespace WorldCup {
         }
 
         void MainMatch() {
+            Random rnd = new Random();
             for (int i = 0; i < time; i++) {
-                Random rnd = new Random();
                 GoalHandler(rnd);
                 YellowCardHandler(rnd);
                 RedCardHandler(rnd);
                 InjuryHandler(rnd);
             }
         }
-
         void ExtraMatch() {
             if (FirstTeamGoal() == SecondTeamGoal() && !isExtraMatch && isKnockOut) {
                 Match extraMatch1st = new Match(firstTeam, secondTeam, true);
@@ -111,25 +111,53 @@ namespace WorldCup {
                     extraMatch2nd.isExtraMatch = true;
                     extraMatch2nd.Compete();
                     result = extraMatch2nd.result;
-                    return;
+                    if (result == Result.DRAW) Penalty();
                 }
-                result = extraMatch1st.result;
-                return;
+                else result = extraMatch1st.result;                                
+            }
+        }
+        void Penalty() {
+            penalties = new List<Goal>();
+            if (FirstTeamGoal() == SecondTeamGoal() && isKnockOut) {
+                int penFirstTeam = RandomGenerator.rnd.Next(0, 5);                
+                int penSecondTeam = RandomGenerator.rnd.Next(0, 5);                
+                if (penFirstTeam > penSecondTeam) result = Result.FIRST_TEAM_WIN;
+                else if (penFirstTeam < penSecondTeam) result = Result.SECOND_TEAM_WIN;
+                else {
+                    do {
+                        penFirstTeam += RandomGenerator.rnd.Next(0, 1);
+                        penSecondTeam += RandomGenerator.rnd.Next(0, 1);
+                        if (penFirstTeam > penSecondTeam) result = Result.FIRST_TEAM_WIN;
+                        else if (penFirstTeam < penSecondTeam) result = Result.SECOND_TEAM_WIN;
+                    } while (penFirstTeam == penSecondTeam);
+                }
+                for (int i = 0; i < penFirstTeam; i++) {
+                    Goal g = new Goal();
+                    g.Scorer = firstTeamOfficial[i].player;
+                    g.Match = this;
+                    penalties.Add(g);
+                }
+                for (int i = 0; i < penSecondTeam; i++) {
+                    Goal g = new Goal();
+                    g.Scorer = secondTeamOfficial[i].player;
+                    g.Match = this;
+                    penalties.Add(g);
+                }
             }
         }
 
         public void GoalHandler(Random rnd) {
-            int chance = rnd.Next(100);
+            int chance = RandomGenerator.rnd.Next(100);
             if (chance < goalChance) {
                 Goal newGoal = new Goal();
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance < 50) {
-                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                     newGoal.Scorer = firstTeamOfficial[chance].player;
                     newGoal.Match = this;
                 }
                 else {
-                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                     newGoal.Scorer = secondTeamOfficial[chance].player;
                     newGoal.Match = this;
                 }
@@ -137,13 +165,13 @@ namespace WorldCup {
             }
         }
         public void YellowCardHandler(Random rnd) {
-            int chance = rnd.Next(100);
+            int chance = RandomGenerator.rnd.Next(100);
             if (chance <= yellowCardChance) {
                 bool canContinue = true;
                 Card newCard = new Card(); // Cần phân loại red vs yellow card
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance > 50) {
-                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                     newCard.Player = firstTeamOfficial[chance].player;
                     firstTeamOfficial[chance].addYellowCard();
                     newCard.Match = this;
@@ -151,7 +179,7 @@ namespace WorldCup {
                     canContinue = SwapPlayerFirstTeam(chance, false);
                 }
                 else {
-                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                     newCard.Player = secondTeamOfficial[chance].player;
                     secondTeamOfficial[chance].addYellowCard();
                     newCard.Match = this;
@@ -166,13 +194,13 @@ namespace WorldCup {
             }
         }
         public void RedCardHandler(Random rnd) {
-            int chance = rnd.Next(100);
+            int chance = RandomGenerator.rnd.Next(100);
             if (chance <= redCardChance) {
                 bool canContinue = true;
                 Card newCard = new Card(); // Cần phân loại red vs yellow card
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance > 50) {
-                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                     newCard.Player = firstTeamOfficial[chance].player;
                     firstTeamOfficial[chance].addYellowCard();
                     newCard.Match = this;
@@ -180,7 +208,7 @@ namespace WorldCup {
                     canContinue = SwapPlayerFirstTeam(chance, false);
                 }
                 else {
-                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                     newCard.Player = secondTeamOfficial[chance].player;
                     secondTeamOfficial[chance].addRedCard();
                     newCard.Match = this;
@@ -194,16 +222,16 @@ namespace WorldCup {
             }
         }
         public void InjuryHandler(Random rnd) {
-            int chance = rnd.Next(100);
+            int chance = RandomGenerator.rnd.Next(100);
             if (chance <= injuryChance) {
                 bool canContinue = true;
-                chance = rnd.Next(100);
+                chance = RandomGenerator.rnd.Next(100);
                 if (chance > 50) {
-                    chance = rnd.Next(firstTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(firstTeamOfficial.Count - 1);
                     canContinue = SwapPlayerFirstTeam(chance, true);
                 }
                 else {
-                    chance = rnd.Next(secondTeamOfficial.Count - 1);
+                    chance = RandomGenerator.rnd.Next(secondTeamOfficial.Count - 1);
                     canContinue = SwapPlayerSecondTeam(chance, true);
                 }
                 if (!canContinue) {
@@ -216,11 +244,13 @@ namespace WorldCup {
             if (FirstTeamGoal() > SecondTeamGoal()) result = Result.FIRST_TEAM_WIN;
             else if (FirstTeamGoal() < SecondTeamGoal()) result = Result.SECOND_TEAM_WIN;
             else result = Result.DRAW;
-        }        
+        }
 
         public void printHappening() {
             Console.WriteLine("Tran dau giua doi " + firstTeam.Name + " va doi " + secondTeam.Name);
-            Console.WriteLine("Ti so: " + FirstTeamGoal().ToString() + " - " + SecondTeamGoal().ToString());
+            Console.Write("Ti so: " + FirstTeamGoal().ToString() + " - " + SecondTeamGoal().ToString());
+            if (penalties == null) Console.WriteLine("");
+            else Console.WriteLine("(" + FirstTeamPen() + " - " + SecondTeamPen() + ")");
         }
 
         public Result Result {
@@ -257,6 +287,13 @@ namespace WorldCup {
             }
             return firstTeamCard;
         }
+        public int FirstTeamPen() {
+            int firstTeamPen = 0;
+            foreach (Goal g in penalties) {
+                if (g.Scorer.Team.ID == firstTeam.ID) firstTeamPen++;
+            }
+            return firstTeamPen;
+        }
         public int SecondTeamGoal() {
             int secondTeamGoal = 0;
             foreach (Goal g in goals) {
@@ -271,6 +308,14 @@ namespace WorldCup {
             }
             return secondTeamCard;
         }
+        public int SecondTeamPen() {
+            int secondTeamPen = 0;
+            foreach (Goal g in penalties) {
+                if (g.Scorer.Team.ID == firstTeam.ID) secondTeamPen++;
+            }
+            return secondTeamPen;
+        }
+
 
         bool SwapPlayerFirstTeam(int id, bool isInjury) {
             PlayerCardCount temp = firstTeamOfficial[id];
