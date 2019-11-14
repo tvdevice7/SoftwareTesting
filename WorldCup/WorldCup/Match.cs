@@ -81,39 +81,31 @@ namespace WorldCup {
             }
         }
 
-        public void Compete() {
-            if (isExtraMatch) time = 15;
-            else time = 90;
-            MainMatch();
-            ExtraMatch();
-            ResultCalculation();
+        public void Compete() {            
+            MatchProgression(90);
+            ExtraMatch();            
             exception = MatchException.NONE;
         }
 
-        void MainMatch() {
+        void MatchProgression(int timeMatch) {
             Random rnd = new Random();
-            for (int i = 0; i < time; i++) {
+            for (int i = 0; i < timeMatch; i++) {
                 GoalHandler(rnd);
                 YellowCardHandler(rnd);
                 RedCardHandler(rnd);
                 InjuryHandler(rnd);
             }
+            ResultCalculate();
         }
         void ExtraMatch() {
-            if (FirstTeamGoal() == SecondTeamGoal() && !isExtraMatch && isKnockOut) {
-                Match extraMatch1st = new Match(firstTeam, secondTeam, true);
-                extraMatch.Add(extraMatch1st);
-                extraMatch1st.isExtraMatch = true;
-                extraMatch1st.Compete();
-                if (extraMatch1st.result == Result.DRAW) {
-                    Match extraMatch2nd = new Match(firstTeam, secondTeam, true);
-                    extraMatch.Add(extraMatch2nd);
-                    extraMatch2nd.isExtraMatch = true;
-                    extraMatch2nd.Compete();
-                    result = extraMatch2nd.result;
+            if (result == Result.DRAW && isKnockOut) {
+                MatchProgression(15);
+                ResultCalculate();
+                if (result == Result.DRAW) {
+                    MatchProgression(15);
+                    ResultCalculate();                                                                                    
                     if (result == Result.DRAW) Penalty();
-                }
-                else result = extraMatch1st.result;                                
+                }                       
             }
         }
         void Penalty() {
@@ -240,7 +232,7 @@ namespace WorldCup {
             }
         }
 
-        void ResultCalculation() {
+        void ResultCalculate() {
             if (FirstTeamGoal() > SecondTeamGoal()) result = Result.FIRST_TEAM_WIN;
             else if (FirstTeamGoal() < SecondTeamGoal()) result = Result.SECOND_TEAM_WIN;
             else result = Result.DRAW;
@@ -250,7 +242,7 @@ namespace WorldCup {
             Console.WriteLine("Tran dau giua doi " + firstTeam.Name + " va doi " + secondTeam.Name);
             Console.Write("Ti so: " + FirstTeamGoal().ToString() + " - " + SecondTeamGoal().ToString());
             if (penalties == null) Console.WriteLine("");
-            else Console.WriteLine("(" + FirstTeamPen() + " - " + SecondTeamPen() + ")");
+            else Console.WriteLine(" (" + FirstTeamPen() + " - " + SecondTeamPen() + ")");
         }
 
         public Result Result {
@@ -311,7 +303,7 @@ namespace WorldCup {
         public int SecondTeamPen() {
             int secondTeamPen = 0;
             foreach (Goal g in penalties) {
-                if (g.Scorer.Team.ID == firstTeam.ID) secondTeamPen++;
+                if (g.Scorer.Team.ID == secondTeam.ID) secondTeamPen++;
             }
             return secondTeamPen;
         }
